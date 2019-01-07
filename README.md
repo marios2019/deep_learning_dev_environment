@@ -125,13 +125,37 @@ Use the already downloaded TensorFlow 1.5.0-gpu image to start a bash shell sess
 sudo nvidia-docker run -it -rm tensorflow/tensorflow:1.5.0-gpu bash
 ```
 
-You can rename the image
+You can rename the image as follows
 ``` bash
 # Create a new tag
 sudo docker tag <old_name> <new_name>
 # Remove old tag (WARNING: if image has only one tag rmi will remove the image - 
 # run sudo docker image ls to list image information)
 sudo docker rmi <old_name>
+```
+
+***
+
+## PyCharm - enable Docker support
+
+You can enable Docker support in PyCharm as explained at the first section of the following link [PyCharm - Enable Docker Support](https://www.jetbrains.com/help/pycharm/docker.html).
+If you are in a Linux environment, make sure to connect to Docker daemon through Unix socket.
+
+***
+
+## PyCharm - configure remote interpreter via Docker
+
+To run applications in development environments deployed in Docker containers follow the next set of instructions [PyCharm - Docker Remote Interpreter](https://www.jetbrains.com/help/pycharm/using-docker-as-a-remote-interpreter.html). If you wish to use GPU-enabled libaries you have to configure the Docker daemon, since PyCharm doesn't support nvidia-docker and does not provide the ability to use command line arguments to `docker run` command, before deploying the container. Basically, you need to edit the `/etc/docker/daemon.json`, by adding the first level key `"default-runtime": "nvidia"`, restart docker daemon (ex. `sudo service docker restart`) and then all containers on that host will run with nvidia runtime.
+ 
+***
+
+## Run Docker image
+
+#### Xserver support
+
+``` bash
+xhost +
+docker run -it --rm --privileged -e DISPLAY=$DISPLAY --net=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix <image-name> <command>
 ```
 
 </div>
