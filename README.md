@@ -17,43 +17,46 @@ Use mutliple [Deep Learning Frameworks](https://developer.nvidia.com/deep-learni
 1. Install [NVidia driver](https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver)
 2. Install [Docker](https://docs.docker.com/install/)
 	1. Uninstall old versions
-``` bash
-$ sudo apt-get remove docker docker-engine docker.io
-```
+	``` bash
+	sudo apt-get remove docker docker-engine docker.io
+	```
+
 	2. Set up the repository
-``` bash
-# 1. Update the apt package index
-sudo apt-get update
-# 2. Install packages to allow apt to use a repository over HTTPS
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    software-properties-common
-# 3. Add Docker’s official GPG key:
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# 4. Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 
-# 0EBF CD88, by searching for the last 8 characters of the fingerprint.
-sudo apt-key fingerprint 0EBFCD88
-pub   4096R/0EBFCD88 2017-02-22
-      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
-uid                  Docker Release (CE deb) <docker@docker.com>
-sub   4096R/F273FCD8 2017-02-22
-# 5. Use the following command to set up the stable repository
-sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
-```
+	``` bash
+	# 1. Update the apt package index
+	sudo apt-get update
+	# 2. Install packages to allow apt to use a repository over HTTPS
+	sudo apt-get install \
+	    apt-transport-https \
+	    ca-certificates \
+	    curl \
+	    software-properties-common
+	# 3. Add Docker’s official GPG key:
+	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+	# 4. Verify that you now have the key with the fingerprint 9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 
+	# 0EBF CD88, by searching for the last 8 characters of the fingerprint.
+	sudo apt-key fingerprint 0EBFCD88
+	pub   4096R/0EBFCD88 2017-02-22
+	      Key fingerprint = 9DC8 5822 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+	uid                  Docker Release (CE deb) <docker@docker.com>
+	sub   4096R/F273FCD8 2017-02-22
+	# 5. Use the following command to set up the stable repository
+	sudo add-apt-repository \
+	   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+	   $(lsb_release -cs) \
+	   stable"
+	```
+
 	3. Install Docker CE
-``` bash
-# 1. Update the apt package index
-sudo apt-get update
-# 2. Install the latest version of Docker CE
-sudo apt-get install docker-ce
-# 3. Verify that Docker CE is installed correctly by running the hello-world image.
-sudo docker run hello-world
-```
+	``` bash
+	# 1. Update the apt package index
+	sudo apt-get update
+	# 2. Install the latest version of Docker CE
+	sudo apt-get install docker-ce
+	# 3. Verify that Docker CE is installed correctly by running the hello-world image.
+	sudo docker run hello-world
+	```
+
 	4. Post-installation steps for Linux
 	This link contains optional procedures for configuring Linux hosts to work better with Docker
 	[Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/)
@@ -85,9 +88,9 @@ docker run --runtime=nvidia --rm nvidia/cuda:9.0-base nvidia-smi
 		where you wish to install the program. We will refer to this destination
 		location as your {installation home} below.
 		2. Open a console and cd into "{installation home}/bin" and type:
-``` bash
-./pycharm.sh
-```
+		``` bash
+		./pycharm.sh
+		```
 		to start the application. As a side effect, this will initialize various
 		configuration files in the ~/.PyCharm2018.3 directory.
 
