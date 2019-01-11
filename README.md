@@ -54,6 +54,10 @@ sudo apt-get install docker-ce
 # 3. Verify that Docker CE is installed correctly by running the hello-world image.
 sudo docker run hello-world
 ```
+	4. Post-installation steps for Linux
+	This link contains optional procedures for configuring Linux hosts to work better with Docker
+	[Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/)
+
 3. Install nvidia-docker
 ``` bash
 # 1. If you have nvidia-docker 1.0 installed: we need to remove it and all existing GPU containers
@@ -151,11 +155,71 @@ To run applications in development environments deployed in Docker containers fo
 
 ## Run Docker image
 
+#### Run tensorboard
+
+Create a .sh script and copy-paste the following code 
+
+``` bash
+#!/bin/bash
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    --host_port)
+    HOST_PORT="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    --container_port)
+    CONTAINER_TCP_PORT="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    --local_dir)
+    LOCAL_DIR="$PWD/"$2""
+    shift # past argument
+    shift # past value
+    ;;
+    --container_dir)
+    CONTAINER_DIR="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    --image)
+    IMAGE_NAME="$2"
+    shift # past argument
+    shift # past value
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+docker run -p "${HOST_PORT}":"${CONTAINER_TCP_PORT}" -v "${LOCAL_DIR}":"${CONTAINER_DIR}" "${IMAGE_NAME}" tensorboard --port "${CONTAINER_TCP_PORT}" --logdir "${CONTAINER_DIR}"
+```
+Run the script as follows
+``` bash
+chmod +x <script_name>.sh
+./<script_name>.sh --host_port <port-id> --container-port <port-id> --local_dir <relative-path-to-model-directory> --container_dir <container-directory> --image <image-name>
+Check if port forwarding is working
+``` bash
+curl http://localhost:<host_port>
+```
+
+Visit the previous url from your favorite browser, to see some nice visualizations e.g. model's  computational graph, metric plots etc.
+
 #### Xserver support
 
 ``` bash
 xhost +
 docker run -it --rm --privileged -e DISPLAY=$DISPLAY --net=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix <image-name> <command>
 ```
+docker run -it --rm --privileged -e DISPLAY=$DISPLAY --net=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/melinos/Repos:/home/melinos/Repos -v /media/:/media tf_1_5_custom bash
 
 </div>
