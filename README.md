@@ -207,6 +207,8 @@ Run the script as follows
 ``` bash
 chmod +x <script_name>.sh
 ./<script_name>.sh --host_port <port-id> --container-port <port-id> --local_dir <relative-path-to-model-directory> --container_dir <container-directory> --image <image-name>
+```
+
 Check if port forwarding is working
 ``` bash
 curl http://localhost:<host_port>
