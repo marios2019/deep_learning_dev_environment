@@ -1,5 +1,3 @@
-<div style="text-align: justify">
-
 # Deep Learning Dev Environment Setup
 
 ## Objectives
@@ -226,5 +224,3 @@ xhost +
 docker run -it --rm --privileged -e DISPLAY=$DISPLAY --net=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix <image-name> <command>
 ```
 docker run -it --rm --privileged -e DISPLAY=$DISPLAY --net=host --ipc=host -v /tmp/.X11-unix:/tmp/.X11-unix -v /home/melinos/Repos:/home/melinos/Repos -v /media/:/media tf_1_5_custom bash
-
-</div>
