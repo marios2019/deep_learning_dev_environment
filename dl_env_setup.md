@@ -268,7 +268,7 @@ If a list of GPU devices is returned, you've installed TensorFlow successfully.
         <h3>Install Gnome-tweaks</h3>
     </summary>
 
-You may notice, especially in monitors with high resolution, e.g., 3840 x 2160 (4K) or 2560 x 1440 (WQHD), Ubuntu tends to not scale its UI optimally. Thus, fonts and icons may appear very small and not easy to read. Although, Ubunut 22.04.3 allows to scale its UI through the display settings, I prefer to use [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) instead. In order to install this tool you will need to go through the following steps:
+You may notice, especially in https://github.com/aristocratos/bpytopmonitors with high resolution, e.g., 3840 x 2160 (4K) or 2560 x 1440 (WQHD), Ubuntu tends to not scale its UI optimally. Thus, fonts and icons may appear very small and not easy to read. Although, Ubunut 22.04.3 allows to scale its UI through the display settings, I prefer to use [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) instead. In order to install this tool you will need to go through the following steps:
 
 1. Make sure that you have the `universe` repository enabled on your Ubuntu system:
 ```bash
@@ -286,13 +286,54 @@ sudo apt install gnome-tweaks
 
 </details>
 
+<details>
+    <summary>
+        <h3>Install bpytop</h3>
+    </summary>
+
+[bpytop](https://github.com/aristocratos/bpytop) is a resource monitor that shows usage and stats for processor, memory, disks, network and processes.
+
+1. Activate the base conda environment:
+
+```bash
+conda activate
+```
+
+2. Install bpytop using `pip`:
+
+```bash
+pip install bpytop --upgrade
+```
+
+3. Run `bpytop` in your command terminal.
 </details>
 
+<details>
+    <summary>
+        <h3>Install nvitop</h3>
+    </summary>
 
+[nvitop](https://github.com/XuehaiPan/nvitop) is an interactive NVIDIA-GPU process viewer and beyond, the one-stop solution for GPU process management. 
+
+1. Activate the base conda environment:
+
+```bash
+conda activate
+```
+
+2. Install nvitop using `pip`:
+
+```bash
+pip install --upgrade nvitop
+```
+
+3. Run `nvitop` in your command terminal.
+</details>
+</details>
 
 <h2>Resources</h2>
 
-  - [How to dual-boot Windows 11 and Linux on your PC](https://www.xda-developers.com/dual-boot-windows-11-linux/)
+  - [How to dual-boot Windows 11 and Linux https://github.com/XuehaiPan/nvitopon your PC](https://www.xda-developers.com/dual-boot-windows-11-linux/)
   - [Disable secure boot y/n?](https://askubuntu.com/questions/785120/disable-secure-boot-y-n)
   - [Ubuntu](https://ubuntu.com/)
   - [NVIDIA GPU drivers](https://www.nvidia.com/Download/index.aspx)
@@ -303,3 +344,5 @@ sudo apt install gnome-tweaks
   - [PyTorch](https://pytorch.org/)
   - [TensorFlow](https://www.tensorflow.org/)
   - [Gnome-tweaks](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-20-04-lts-focal-fossa-linux)
+  - [bpytop](https://github.com/aristocratos/bpytop)
+  - [nvitop](https://github.com/XuehaiPan/nvitop)
