@@ -92,9 +92,35 @@ Now you're ready to install Linux on your empty partition. If you removed the US
 
 </details>
 
+<details>
+    <summary>
+        <h2>Setup Conda</h2>
+    </summary>
+
+<a href=https://docs.conda.io/en/latest/>Conda</a> is an open source package management system and environment management system that runs on Windows, macOS, and Linux. For this guide will be using <a href=https://docs.conda.io/projects/miniconda/en/latest/#>Miniconda</a> which is a free minimal installer for conda. For installing Miniconda follow the next steps:
+
+1. Open a command terminal and execute these four commands to quickly and quietly install the latest 64-bit version of the installer and then clean up afterwards. To install a different version or architecture of Miniconda for Linux, change the name of the `.sh` installer in the `wget` command.
+        
+```bash
+mkdir -p ~/miniconda3
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+rm -rf ~/miniconda3/miniconda.sh
+```
+2. After installing, initialize your newly-installed Miniconda. The following commands initialize for bash and zsh shells:
+
+```bash
+~/miniconda3/bin/conda init bash
+~/miniconda3/bin/conda init zsh
+```
+</details>
+
 
 
 <h2>Resources</h2>
 
   - [How to dual-boot Windows 11 and Linux on your PC](https://www.xda-developers.com/dual-boot-windows-11-linux/)
   - [Disable secure boot y/n?](https://askubuntu.com/questions/785120/disable-secure-boot-y-n)
+  - [Ubuntu](https://ubuntu.com/)
+  - [Conda](https://docs.conda.io/en/latest/)
+  - [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/#)
