@@ -265,6 +265,31 @@ If a list of GPU devices is returned, you've installed TensorFlow successfully.
 
 <details>
     <summary>
+        <h3>Setup PyCharm</h3>
+    </summary>
+
+For code development you can use the popular [PyCharm IDE](https://www.jetbrains.com/pycharm/)
+
+1. Download PyCharm from [here](https://www.jetbrains.com/pycharm/download/?section=linux).
+
+2. Unpack PyCharm using:
+
+```bash
+tar -xzvf pycharm*
+```
+
+3. Then, follow the installation instructions found in `pycharm-<version>/Install-Linux-tar.txt`.
+
+4. Finally, remove the PyCharm archive:
+
+```bash
+rm pycharm-*.tar.gz
+```
+
+</details>
+
+<details>
+    <summary>
         <h3>Install Gnome-tweaks</h3>
     </summary>
 
@@ -343,6 +368,7 @@ pip install --upgrade nvitop
   - [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/#)
   - [PyTorch](https://pytorch.org/)
   - [TensorFlow](https://www.tensorflow.org/)
+  - [PyCharm](https://www.jetbrains.com/pycharm/)
   - [Gnome-tweaks](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-20-04-lts-focal-fossa-linux)
   - [bpytop](https://github.com/aristocratos/bpytop)
   - [nvitop](https://github.com/XuehaiPan/nvitop)
