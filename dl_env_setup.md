@@ -293,7 +293,7 @@ rm pycharm-*.tar.gz
         <h3>Install Gnome-tweaks</h3>
     </summary>
 
-You may notice, especially in https://github.com/aristocratos/bpytopmonitors with high resolution, e.g., 3840 x 2160 (4K) or 2560 x 1440 (WQHD), Ubuntu tends to not scale its UI optimally. Thus, fonts and icons may appear very small and not easy to read. Although, Ubunut 22.04.3 allows to scale its UI through the display settings, I prefer to use [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) instead. In order to install this tool you will need to go through the following steps:
+You may notice, especially in monitors with high resolution, e.g., 3840 x 2160 (4K) or 2560 x 1440 (WQHD), Ubuntu tends to not scale its UI optimally. Thus, fonts and icons may appear very small and not easy to read. Although, Ubunut 22.04.3 allows to scale its UI through the display settings, I prefer to use [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) instead. In order to install this tool you will need to go through the following steps:
 
 1. Make sure that you have the `universe` repository enabled on your Ubuntu system:
 ```bash
