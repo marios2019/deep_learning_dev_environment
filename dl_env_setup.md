@@ -115,6 +115,36 @@ rm -rf ~/miniconda3/miniconda.sh
 ```
 </details>
 
+<details>
+    <summary>
+        <h2>Optional steps</h2>
+    </summary>
+
+<details>
+    <summary>
+        <h3>Install Gnome-tweaks</h3>
+    </summary>
+
+You may notice, especially in monitors with high resolution, e.g., 3840 x 2160 (4K) or 2560 x 1440 (WQHD), Ubuntu tends to not scale its UI optimally. Thus, fonts and icons may appear very small and not easy to read. Although, Ubunut 22.04.3 allows to scale its UI through the display settings, I prefer to use [gnome-tweaks](https://gitlab.gnome.org/GNOME/gnome-tweaks) instead. In order to install this tool you will need to go through the following steps:
+
+1. Make sure that you have the `universe` repository enabled on your Ubuntu system:
+```bash
+sudo add-apt-repository universe
+```
+
+2. Next, execute the following command to install Tweak Tool on your Ubuntu 22.04 system:
+```bash
+sudo apt install gnome-tweaks
+````
+
+3. Finally, run `gnome-tweaks` through your command terminal.
+
+4. From the menu on the left select **Fonts** and then adjust the **Scaling Factor** accordingly.
+
+</details>
+
+</details>
+
 
 
 <h2>Resources</h2>
@@ -124,3 +154,4 @@ rm -rf ~/miniconda3/miniconda.sh
   - [Ubuntu](https://ubuntu.com/)
   - [Conda](https://docs.conda.io/en/latest/)
   - [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/#)
+  - [Gnome-tweaks](https://linuxconfig.org/how-to-install-tweak-tool-on-ubuntu-20-04-lts-focal-fossa-linux)
