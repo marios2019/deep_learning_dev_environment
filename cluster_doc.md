@@ -128,3 +128,65 @@ srun -c 1 -n 1 -p defq --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
 </details>
 
 </details>
+
+<details>
+  <summary>
+<h2>Module Usage</h2>
+  </summary>
+
+The process for using environment modules is convenient and simple. You can ```load``` and ```unload``` them as you 
+please, enabling and disabling different software. You can list currently active modules with ```module list```, search 
+for modules with ```module avail```, and unload all active modules with ```module purge```. The following guide outlines 
+each of these processes.
+
+<h3>List All Available Modules</h3>
+
+To list all available modules, use any of the four commands listed below:
+
+```bash
+module available
+module avail
+module av
+ml av
+```
+
+<h3>Search for modules</h3>
+
+To filter the output of ```module avail``` for just the ```gcc``` modules, use the following command:
+
+```bash
+module avail gcc
+```
+
+<h3>Load modules</h3>
+
+To load modules, use the following command:
+
+```bash
+module load GCC/10.3.0
+```
+
+<h3>Unload modules</h3>
+
+To unload modules, use the following command:
+
+```bash
+module unload GCC/10.3.0
+```
+
+<h3>Unload all modules</h3>
+
+To unload _all_ modules, use the following command:
+
+```bash
+module purge
+```
+
+<h3>List currently loaded modules</h3>
+To list the modules that are currently loaded, use the following command:
+
+```bash
+module list
+```
+
+</details>
