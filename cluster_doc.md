@@ -110,6 +110,21 @@ srun -c 1 -n 1 -p defq --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
 
 </details>
 
+
+<details>
+  <summary>
+<h2>Storage</h2>
+  </summary>
+
+Below is a table of all available storage.
+
+|            Mountpoint             |       Name       |Type| User Quota |        Group Quota         |                                                                                                                                                                                   Description                                                                                                                                                                                    |
+|:---------------------------------:|:----------------:|---:|:----------:|:--------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|  ```/trinity/home/<user-name>```  | Home directories |SSD|    20GB    |             -              |                                                                                                                                   Home directories should be used only for user init files. You can check your quota by using ```quota -us```                                                                                                                                    |
+| ```/lustreFS/data/<group-name>``` | Work directories |SSD|     -      | 30TB (or 20,971,520 files) | Should be used as the primary location for running cluster jobs. Moreover, you can setup your conda installation under this directory. It's a good practise to create a new subfolder where you will store all of your data, code, etc. This is a shared folder for all users in the group. You can check the group's quota by using ```lfs quota -gh <group-name> /lustreFS/``` |
+
+</details>
+
 <details>
   <summary>
 <h2>Module Usage</h2>
