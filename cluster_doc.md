@@ -8,7 +8,10 @@ This document serves as a comprehensive guide to understanding and utilizing the
     <summary>
 <h3>Cluster Specification</h3>        
     </summary>
+<details>
+  <summary>
 <h4>Hardware Configuration</h4>
+  </summary>
 
 * **Head Node**
   * **Chassis:** GIGABYTE R182-Z90-00
@@ -34,7 +37,18 @@ This document serves as a comprehensive guide to understanding and utilizing the
   * **Storage:**
     * 2x 240GB Intel SSDSC2KB240G7 
     * 24x 7.68TB Samsung MZILT7T6HALA/007 (/lustreFS - 305TB)
+</details>
 
+<details>
+<summary>
+<h4>Operating System and Software Environment</h4>
+</summary>
+
+* **Operating System:** <a href=https://rockylinux.org/>Rocky Linux 8.5 (Green Obsidian)</a>
+* **Linux kernel version:** 4.18.0-348.23.1.el8_5.x86_64
+* **Resource Management System:** <a href=https://slurm.schedmd.com/documentation.html>Slurm</a>
+* **Environment Module System:** <a href=https://lmod.readthedocs.io/en/latest/>Lmod</a>
+</details>
 
 </details>
 
