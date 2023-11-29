@@ -8,10 +8,8 @@ This document serves as a comprehensive guide to understanding and utilizing the
     <summary>
 <h2>Cluster Specification</h2>        
     </summary>
-<details>
-  <summary>
+
 <h3>Hardware Configuration</h3>
-  </summary>
 
 * **Head Node**
   * **Chassis:** GIGABYTE R182-Z90-00
@@ -37,18 +35,13 @@ This document serves as a comprehensive guide to understanding and utilizing the
   * **Storage:**
     * 2x 240GB Intel SSDSC2KB240G7 
     * 24x 7.68TB Samsung MZILT7T6HALA/007 (/lustreFS - 305TB)
-</details>
 
-<details>
-<summary>
 <h3>Operating System and Software Environment</h3>
-</summary>
 
 * **Operating System:** <a href=https://rockylinux.org/>Rocky Linux 8.5 (Green Obsidian)</a>
 * **Linux kernel version:** 4.18.0-348.23.1.el8_5.x86_64
 * **Resource Management System:** <a href=https://slurm.schedmd.com/documentation.html>Slurm</a>
 * **Environment Module System:** <a href=https://lmod.readthedocs.io/en/latest/>Lmod</a>
-</details>
 
 </details>
 
@@ -57,10 +50,7 @@ This document serves as a comprehensive guide to understanding and utilizing the
 <h2>Submitting Jobs</h2>
   </summary>
 
-<details>
-  <summary>
 <h3>Introduction to Slurm: The Job Scheduler</h3>
-  </summary>
 
 Slurm is the job scheduler we use. Here we will go into depth about some elements of the scheduler. There are many more 
 features of Slurm that go beyond the scope of this guide, but all that you as a user need to know should be available.
@@ -78,12 +68,8 @@ where you will see the current state of each compute node. If you want to check 
 you can use the ```squeue``` command. If you add the  ```-u $USER``` argument you get a list of your current jobs.
 If you want to sumbit a job in the cluster used the following two methods. **NEVER EVER RUNS JOBS DIRECTLY ON THE
 LOGIN/HEAD NODE.**
-</details>
 
-<details>
-  <summary>
 <h3>Batch Jobs</h3>
-  </summary>
 
 In order to submit a batch job you can use the ```sbatch``` command. ```sbatch``` is a non-blocking command, meaning 
 there is not a circumstance where running the command will cause it to hold. Even if the resources requested are not 
@@ -111,12 +97,8 @@ python ...
 ```
 
 This script will allocate 2 CPUs, 1 GPU and 50,000MB of RAM in the defq partition for up to 3 days.
-</details>
 
-<details>
-  <summary>
 <h3>Interactive Jobs</h3>
-  </summary>
 
 You can use the ```srun``` command in order to run interactive jobs. ```srun``` is a blocking command and it will not let
 you execute other commands until this command (job) is finished. You can create an interactive job by using the same arguments
@@ -125,7 +107,6 @@ as in a batch script (see the following example):
 ```bash
 srun -c 1 -n 1 -p defq --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
 ```
-</details>
 
 </details>
 
