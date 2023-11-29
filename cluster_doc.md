@@ -50,7 +50,12 @@ This document serves as a comprehensive guide to understanding and utilizing the
 * **Environment Module System:** <a href=https://lmod.readthedocs.io/en/latest/>Lmod</a>
 </details>
 
+</details>
+
+<details>
+  <summary>
 <h2>Submitting Jobs</h2>
+  </summary>
 
 <details>
   <summary>
@@ -73,6 +78,7 @@ where you will see the current state of each compute node. If you want to check 
 you can use the ```squeue``` command. If you add the  ```-u $USER``` argument you get a list of your current jobs.
 If you want to sumbit a job in the cluster used the following two methods. **NEVER EVER RUNS JOBS DIRECTLY ON THE
 LOGIN/HEAD NODE.**
+</details>
 
 <details>
   <summary>
@@ -122,7 +128,3 @@ srun -c 1 -n 1 -p defq --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
 </details>
 
 </details>
-
-
-</details>
-
