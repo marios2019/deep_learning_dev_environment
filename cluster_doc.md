@@ -47,6 +47,63 @@ This document serves as a comprehensive guide to understanding and utilizing the
 
 <details>
   <summary>
+<h2>Accessing the Cluster</h2>
+  </summary>
+
+In order to connect to the CYENS cluster you will need to use an **SSH connection**. SSH stands for “_secure shell_”. 
+A shell is the terminal, or Command Line Interface (CLI), that you type commands into. The most common shell in Linux is **bash**, 
+which is most likely what you will be using in the CYENS cluster.
+
+<h3>Generate SSH Keys</h3>
+
+The authentication method we use for SSH connections is with public/private RSA keys. There is a public SSH key that is 
+stored on the cluster, and a private SSH key that you keep on your local computer. In order to login to the CYENS cluster, 
+you need to authenticate the public key with your private key.
+
+Use the following instructions to generate and save your public key on the cluster (the following instru:
+
+1. Open your terminal and run the following command to create an ssh-key pair:
+
+```bash
+ssh-keygen
+```
+
+2. Follow the on-screen instructions and if successful, the private (```id_rsa```) and public key (```id_rsa.pub```) will be created under the ```$HOME/.ssh```
+directory. 
+3. Forward the public key to your MRG leader so he/she can request a cluster account for you.
+4. For Linux or Mac users use the following command to change the permissions of the private key due to its importance to security:
+
+```bash
+chmod 600 ~/.ssh/id_rsa
+```
+
+5. **Optional:** It's important that you use a dedicated ssh-key pair for accessing the CYENS cluster. It is also recommended
+to add a passphrase to your key:
+
+```bash
+ssh-keygen -p -f ~/.ssh/id_rsa
+```
+
+<h3>Connect to the cluster using SSH connection</h3>
+The following instructions will show you how to connect to the cluster using the SSH keys that you generated and stored, through your terminal:
+
+1. If the file  ```~/.ssh/config``` doesn't exist, creat it.
+2. Using a text editor, copy the following contents to that file:
+
+```bash
+Host cyens_cluster
+  Hostname 82.116.197.12
+  User <user-name>
+  IdentityFile <path-to-private-key>
+```
+
+3. Save the file **without an extension**
+4. Type command ```ssh cyens_cluster``` and should be able to connect to the cluster.
+
+</details>
+
+<details>
+  <summary>
 <h2>Submitting Jobs</h2>
   </summary>
 
