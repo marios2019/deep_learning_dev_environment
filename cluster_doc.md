@@ -98,7 +98,48 @@ Host cyens_cluster
 ```
 
 3. Save the file **without an extension**
-4. Type command ```ssh cyens_cluster``` and should be able to connect to the cluster.
+4. Type the command ```ssh cyens_cluster``` and you should be able to connect to the cluster.
+
+<h3>Connecting Desktop VS Code</h3>
+
+If you prefer to use <a href="https://code.visualstudio.com/">**Visual Studio Code**</a> (VS Code) as your editor, you can 
+connect VS Code to the cluster. The following instructions will guide you through how to connect the VS Code Desktop App to the cluster.
+
+<h4>Configure SSH</h4>
+
+To connect your local VS Code to the cluster using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">**Remote-SSH**</a>
+feature, you must configure your ssh client to be able to hop through the login node to a compute node. To configure your ssh client, 
+add the following lines to your ```~/.ssh/config``` file.
+
+```bash
+Host cyens_cluster
+  Hostname 82.116.197.12
+  User <user-name>
+  IdentityFile <path-to-private-key>
+
+Host *.82.116.197.12
+  User <user-name>
+  IdentityFile <path-to-private-key>
+  ProxyJump cyens_cluster
+```
+
+<h4>Start an interactive job</h4>
+
+After configuring your ssh client, you **must start an interactive job** with the resources you need. Make note of the 
+hostname since you will need it for the next step. For example:
+
+```bash
+srun -p defq -n 1 -c 4 --mem=10000 --gres=gpu:1 -t 8:00:00 --pty /bin/bash
+hostname -f # this will print the name of the compute node
+```
+
+The previous line of code will initiate an interactive job where 4 CPU cores, 1 GPU and 10GB of RAM will
+be allocated to that job for a maximum duration of 8 hours.
+
+<h4>Connect VS Code</h4>
+
+Once an interactive job is set up, you can connect VS Code to the cluster. To do so, select "_Remote-SSH: Connect to host_"
+from the command pallette and type in the hostname from above, e.g., ```gpu01.cluster.82.116.197.12```.
 
 </details>
 
