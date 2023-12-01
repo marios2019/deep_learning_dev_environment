@@ -117,7 +117,7 @@ Host cyens_cluster
   User <user-name>
   IdentityFile <path-to-private-key>
 
-Host *.82.116.197.12
+Host *.cluster
   User <user-name>
   IdentityFile <path-to-private-key>
   ProxyJump cyens_cluster
@@ -139,7 +139,7 @@ be allocated to that job for a maximum duration of 8 hours.
 <h4>Connect VS Code</h4>
 
 Once an interactive job is set up, you can connect VS Code to the cluster. To do so, select "_Remote-SSH: Connect to host_"
-from the command pallette and type in the hostname from above, e.g., ```gpu01.cluster.82.116.197.12```.
+from the command pallette and type in the hostname from above, e.g., ```gpu01.cluster```.
 
 </details>
 
