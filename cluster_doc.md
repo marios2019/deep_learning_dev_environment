@@ -312,16 +312,16 @@ conda install openblas-devel -c anaconda
 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge
 ```
 
-2. Load the ```CUDA/11.3.1``` module:
+2. Load the ```CUDA/11.3.1``` and ```gnu9``` module:
 
 ```bash
-module load CUDA/11.3.1
+module load CUDA/11.3.1 gnu9
 ```
 
 3. Create the following interactive job:
 
 ```bash
-srun -n 1 -c 4 --gres=gpu:1 --mem=10000 --pty /bin/bash
+srun -n 1 -c 4 --gres=gpu:1 --mem=20000 --pty /bin/bash
 ```
 
 4. Activate again the ```py3-mink``` conda environment and install the latest MinkowskiEngine as follows:
