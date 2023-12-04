@@ -284,3 +284,53 @@ module list
 ```
 
 </details>
+
+
+<details>
+  <summary>
+<h2>Installing 3rd party libraries</h2>
+  </summary>
+
+<details>
+  <summary>
+    <h3><a href="https://github.com/NVIDIA/MinkowskiEngine">MinkowskiEngine</a></h3>
+ </summary>
+
+The Minkowski Engine is an auto-differentiation library for sparse tensors. It supports all standard neural network 
+layers such as convolution, pooling, unpooling, and broadcasting operations for sparse tensors. For more information, 
+please visit the <a href="https://nvidia.github.io/MinkowskiEngine/overview.html">documentation page</a>.
+
+<h4>Installation on cluster using Conda and CUDA 11.3</h4>
+
+1. First create the following conda environment and install the necessary python libraries:
+
+```bash
+conda create -n py3-mink python=3.8
+conda activate py3-mink
+
+conda install openblas-devel -c anaconda
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 -c pytorch -c conda-forge
+```
+
+2. Load the ```CUDA/11.3.1``` module:
+
+```bash
+module load CUDA/11.3.1
+```
+
+3. Create the following interactive job:
+
+```bash
+srun -n 1 -c 4 --gres=gpu:1 --mem=10000 --pty /bin/bash
+```
+
+4. Activate again the ```py3-mink``` conda environment and install the latest MinkowskiEngine as follows:
+
+```bash
+conda activate py3-mink
+pip install -U git+https://github.com/NVIDIA/MinkowskiEngine -v --no-deps --install-option="--blas_include_dirs=${CONDA_PREFIX}/include" --install-option="--blas=openblas"
+```
+
+</details>
+
+</details>
