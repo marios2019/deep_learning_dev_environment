@@ -109,7 +109,7 @@ connect VS Code to the cluster. The following instructions will guide you throug
 
 To connect your local VS Code to the cluster using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">**Remote-SSH**</a>
 feature, you must configure your ssh client to be able to hop through the login node to a compute node. To configure your ssh client, 
-add the following lines to your ```~/.ssh/config``` file.
+add the following lines to your local ```~/.ssh/config``` file.
 
 ```bash
 Host cyens_cluster
@@ -123,24 +123,73 @@ Host *.cluster
   ProxyJump cyens_cluster
 ```
 
-<h4>Start an interactive job</h4>
+<h4>Start a user ```sshd``` process</h4>
 
-After configuring your ssh client, you **must start an interactive job** with the resources you need. Make note of the 
-hostname since you will need it for the next step. For example:
+Connect to the CYENS cluster and create a new pair of ssh keys (on the head node):
 
 ```bash
-srun -p defq -n 1 -c 4 --mem=10000 --gres=gpu:1 -t 8:00:00 --pty /bin/bash
-hostname -f # this will print the name of the compute node
+ssh-keygen -t rsa -f .ssh/cluster_user_sshd
 ```
 
-The previous line of code will initiate an interactive job where 4 CPU cores, 1 GPU and 10GB of RAM will
-be allocated to that job for a maximum duration of 8 hours.
+Then create the following ```sshd.sh``` bash script:
+
+```bash
+#!/bin/bash
+#SBATCH -o res_%j.txt      # output file
+#SBATCH -e res_%j.err      # File to which STDERR will be written
+#SBATCH -J sshd            # Job name
+#SBATCH --partition=defq   # Partition to submit to
+#SBATCH --ntasks=1         # Number of tasks
+#SBATCH --cpus-per-task=2  # Number of cores per task
+#SBATCH --gres=gpu:1       # Number of GPUs
+#SBATCH --mem=1000         # Memory in MB
+#SBATCH --time=0-04:00     # Maximum runtime in D-HH:MM
+
+PORT=$(python -c 'import socket; s=socket.socket(); s.bind(("", 0)); print(s.getsockname()[1]); s.close()')
+
+echo "********************************************************************"
+echo "Starting sshd in Slurm as user"
+echo "Environment information:"
+echo "Date:" $(date)
+echo "Allocated node:" $(hostname)
+echo "Path:" $(pwd)
+echo "Listening on:" $PORT
+echo "********************************************************************"
+
+/usr/sbin/sshd -D -p ${PORT} -f /dev/null -h ${HOME}/.ssh/cluster_user_sshd
+```
+
+and submit a batch job based on this, e.g., ```sbatch sshd.sh```. This will create a batch job
+with 2 CPUs, 1 GPU, 1GB of RAM and will run for up to 4 hours. The user-defined ```sshd``` process will
+accept ```ssh``` connections to the port ```$PORT``` of the allocated compute node ```$(hostname)```. This information can
+be found in the corresponding ```res_<job-id>.txt``` log file. 
+
+At this point, you will be able to connect via ssh to the batch job:
+
+```bash
+ssh -p <port-where-the-sshd-process-started> <allocated-node> # gpu<01-08>.cluster
+```
+
+Notice that the ```ssh``` session can only see the resources allocated to the job. It is important to only allocate resources
+that you will actually use and for a reasonable amount of time, usually up to 12 hours.
 
 <h4>Connect VS Code</h4>
 
-Once an interactive job is set up, you can connect VS Code to the cluster. To do so, select "_Remote-SSH: Connect to host_"
-from the command pallette and type in the hostname from above, e.g., ```gpu01.cluster```.
+Once the ```sshd``` is set up through a batch job, you can connect VS Code to the cluster. To do so, select 
+"_Remote-SSH: Connect to host_" from the command pallette and type in the allocated hostname and port, e.g., ```ssh -p 6000 gpu01.cluster```.
+VS Code will update your ```config``` file automatically as follows:
 
+```bash
+Host gpu01.cluster
+    HostName gpu01.cluster
+    Port 6000
+```
+
+<h4>Remember to end the ```sshd``` process</h4>
+
+It is important to cancel the Slurm job when we don’t need the ```sshd``` listening anymore. Moreover, make sure
+to close the connection to the remote host from VS Code and remove the additional entries in the ```config``` file, added
+by VS Code.
 </details>
 
 <details>
