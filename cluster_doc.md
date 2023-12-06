@@ -123,7 +123,7 @@ Host *.cluster
   ProxyJump cyens_cluster
 ```
 
-<h4>Start a user ```sshd``` process</h4>
+<h4>Start a user SSHD process</h4>
 
 Connect to the CYENS cluster and create a new pair of ssh keys (on the head node):
 
@@ -175,7 +175,7 @@ that you will actually use and for a reasonable amount of time, usually up to 12
 
 <h4>Connect VS Code</h4>
 
-Once the ```sshd``` is set up through a batch job, you can connect VS Code to the cluster. To do so, select 
+Once the ```sshd``` process is set up through a batch job, you can connect VS Code to the cluster. To do so, select 
 "_Remote-SSH: Connect to host_" from the command pallette and type in the allocated hostname and port, e.g., ```ssh -p 6000 gpu01.cluster```.
 VS Code will update your ```config``` file automatically as follows:
 
@@ -185,9 +185,9 @@ Host gpu01.cluster
     Port 6000
 ```
 
-<h4>Remember to end the ```sshd``` process</h4>
+<h4>Remember to end the SSHD process</h4>
 
-It is important to cancel the Slurm job when we don’t need the ```sshd``` listening anymore. Moreover, make sure
+It is important to cancel the Slurm job when we don’t need the ```sshd``` process listening anymore. Moreover, make sure
 to close the connection to the remote host from VS Code and remove the additional entries in the ```config``` file, added
 by VS Code.
 </details>
