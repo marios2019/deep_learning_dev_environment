@@ -4,7 +4,7 @@
 
 This document serves as a comprehensive guide to understanding and utilizing the GPU cluster available at CYENS. 
 
-<details>
+<details open>
     <summary>
 <h2>Cluster Specification</h2>        
     </summary>
@@ -45,7 +45,7 @@ This document serves as a comprehensive guide to understanding and utilizing the
 
 </details>
 
-<details>
+<details open>
   <summary>
 <h2>Accessing the Cluster</h2>
   </summary>
@@ -192,7 +192,7 @@ to close the connection to the remote host from VS Code and remove the additiona
 by VS Code.
 </details>
 
-<details>
+<details open>
   <summary>
 <h2>Submitting Jobs</h2>
   </summary>
@@ -258,7 +258,7 @@ srun -c 1 -n 1 -p defq --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
 </details>
 
 
-<details>
+<details open>
   <summary>
 <h2>Storage</h2>
   </summary>
@@ -272,7 +272,7 @@ Below is a table of all available storage.
 
 </details>
 
-<details>
+<details open>
   <summary>
 <h2>Module Usage</h2>
   </summary>
@@ -335,12 +335,12 @@ module list
 </details>
 
 
-<details>
+<details open>
   <summary>
 <h2>Installing 3rd party libraries</h2>
   </summary>
 
-<details>
+<details open>
   <summary>
     <h3><a href="https://github.com/NVIDIA/MinkowskiEngine">MinkowskiEngine</a></h3>
  </summary>
@@ -382,7 +382,7 @@ pip install -U git+https://github.com/NVIDIA/MinkowskiEngine -v --no-deps --inst
 
 </details>
 
-<details>
+<details open>
   <summary>
     <h3><a href="https://github.com/CGuangyan-BIT/PointGPT">PointGPT</a></h3>
  </summary>
