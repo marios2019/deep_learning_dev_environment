@@ -382,4 +382,61 @@ pip install -U git+https://github.com/NVIDIA/MinkowskiEngine -v --no-deps --inst
 
 </details>
 
+<details>
+  <summary>
+    <h3><a href="https://github.com/CGuangyan-BIT/PointGPT">PointGPT</a></h3>
+ </summary>
+
+PointGPT is a novel approach that extends the concept of GPT to point clouds, utilizing a point cloud auto-regressive 
+generation task for pre-training transformer models. For more information, please refer to the [arXiv preprint](https://arxiv.org/pdf/2305.11487.pdf).
+
+<h4>Installation on cluster using Conda and CUDA 11.3</h4>
+
+1. First create the following conda environment and install the necessary python libraries:
+
+```bash
+conda create -n pointgpt python=3.8
+conda activate pointgpt
+
+conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 tensorboard -c pytorch -c conda-forge
+pip install easydict h5py matplotlib open3d opencv-python pyyaml timm tqdm transforms3d termcolor scipy
+```
+
+2. Load the ```CUDA/11.3.1``` and ```gnu9``` module:
+
+```bash
+module load CUDA/11.3.1 gnu9
+```
+
+3. Clone the PointGPT GitHub repository:
+
+```bash
+git clone https://github.com/CGuangyan-BIT/PointGPT.git
+cd PointGPT
+```
+
+4. Create the following interactive job:
+
+```bash
+srun -n 1 -c 4 --gres=gpu:1 --mem=20000 --pty /bin/bash
+```
+
+5. Activate again the ```pointgpt``` conda environment and install the following extensions:
+
+```bash
+conda activate pointgpt
+# Chamfer Distance & emd
+cd ./extensions/chamfer_dist
+python setup.py install --user
+cd ../emd
+python setup.py install --user
+cd ../
+# PointNet++
+pip install "git+https://github.com/erikwijmans/Pointnet2_PyTorch.git#egg=pointnet2_ops&subdirectory=pointnet2_ops_lib"
+# GPU kNN
+pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.2/KNN_CUDA-0.2-py3-none-any.whl
+cd ../
+```
+</details>
+
 </details>
