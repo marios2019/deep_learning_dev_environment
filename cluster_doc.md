@@ -213,7 +213,7 @@ defq*        up   infinite      5  alloc gpu[02-04,06-07]
 
 where you will see the current state of each compute node. If you want to check the current queue of jobs
 you can use the ```squeue``` command. If you add the  ```-u $USER``` argument you get a list of your current jobs.
-If you want to sumbit a job in the cluster used the following two methods. **NEVER EVER RUNS JOBS DIRECTLY ON THE
+If you want to sumbit a job in the cluster used the following two methods. **NEVER EVER RUN JOBS DIRECTLY ON THE
 LOGIN/HEAD NODE.**
 
 <h3>Batch Jobs</h3>
