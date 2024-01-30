@@ -400,6 +400,8 @@ conda activate pointgpt
 
 conda install pytorch==1.10.1 torchvision==0.11.2 torchaudio==0.10.1 cudatoolkit=11.3 tensorboard -c pytorch -c conda-forge
 pip install easydict h5py matplotlib open3d opencv-python pyyaml timm tqdm transforms3d termcolor scipy
+pip install setuptools==59.5.0
+conda install -c anaconda libgcc-ng 
 ```
 
 2. Load the ```CUDA/11.3.1``` and ```gnu9``` module:
