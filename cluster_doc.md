@@ -1,12 +1,14 @@
-<h1>CYENS GPU Cluster Documentation</h1>
+<h1>Prometheus Cluster Documentation</h1>
+
+![Prometheus ASCII Art](assets/prometheus.png)
 
 <h2>Overview</h2>
 
-This document serves as a comprehensive guide to understanding and utilizing the GPU cluster available at CYENS. 
+This document serves as a comprehensive guide to understanding and utilizing the Prometheus cluster available at CYENS. 
 
 <details open>
     <summary>
-<h2>Cluster Specification</h2>        
+<h2>Prometheus Specification</h2>        
     </summary>
 
 <h3>Hardware Configuration</h3>
@@ -18,14 +20,21 @@ This document serves as a comprehensive guide to understanding and utilizing the
   * **RAM:** 16x 32GB Samsung M393A4K40EB3-CWE - total 512GB
   * **Storage:** 2x 1.92TB Intel SSDSC2KB019T8 (/trinity/home - 400G)
 * **Compute Nodes**
-  * **Number of Compute Nodes:** 8 
+  * **Number of Compute Nodes:** 9
   * **Nodelist:** ```gpu[01-08]```
-  * **Chassis:** Supermicro AS -4124GS-TNR
-  * **Motherboard:** Supermicro H12DSG-O-CPU
-  * **CPU:** 2x AMD EPYC 7313, 16C/32T 
-  * **GPU:** 8x NVIDIA A5000, 24GB, 8192 CUDA cores, 256 Tensor Cores, 27.8 TFLOPS FP32 
-  * **RAM:** 16x 32GB SK Hynix HMAA4GR7AJR8N-XN - total 512GB
-  * **Storage:** 1x 1TB Samsung SSD 980
+    * **Chassis:** Supermicro AS-4124GS-TNR
+    * **Motherboard:** Supermicro H12DSG-O-CPU
+    * **CPU:** 2x AMD EPYC 7313, 16C/32T 
+    * **GPU:** 8x NVIDIA A5000, 24GB, 8192 CUDA cores, 256 Tensor Cores, 27.8 TFLOPS FP32 
+    * **RAM:** 16x 32GB SK Hynix HMAA4GR7AJR8N-XN - total 512GB
+    * **Storage:** 1x 1TB Samsung SSD 980
+  * **Nodelist:** ```gpu09```
+    * **Chassis:** ASUS RS720A-E11-RS12
+    * **Motherboard:** ASUS KMPP-D32
+    * **CPU:** 2x AMD EPYC 7313, 16C/32T 
+    * **GPU:** 4x NVIDIA 6000 Ada 48GB, 18176 CUDA cores, 568 Tensor Cores, 91.06 TFLOPS FP32 
+    * **RAM:** 16x 32GB SK Hynix HMAA4GR7AJR8N-XN - total 512GB
+    * **Storage:** 1x 1TB Samsung SSD 980
 * **Storage Nodes:**
   * **Number of Storage Nodes:** 2 
   * **Chassis:** Supermicro Super Server
@@ -47,17 +56,17 @@ This document serves as a comprehensive guide to understanding and utilizing the
 
 <details open>
   <summary>
-<h2>Accessing the Cluster</h2>
+<h2>Accessing Prometheus</h2>
   </summary>
 
-In order to connect to the CYENS cluster you will need to use an **SSH connection**. SSH stands for “_secure shell_”. 
+In order to connect to the Prometheus cluster you will need to use an **SSH connection**. SSH stands for “_secure shell_”. 
 A shell is the terminal, or Command Line Interface (CLI), that you type commands into. The most common shell in Linux is **bash**, 
-which is most likely what you will be using in the CYENS cluster.
+which is most likely what you will be using in the Prometheus cluster.
 
 <h3>Generate SSH Keys</h3>
 
 The authentication method we use for SSH connections is with public/private RSA keys. There is a public SSH key that is 
-stored on the cluster, and a private SSH key that you keep on your local computer. In order to login to the CYENS cluster, 
+stored on the cluster, and a private SSH key that you keep on your local computer. In order to login to Prometheus, 
 you need to authenticate the public key with your private key.
 
 Use the following instructions to generate and save your public key on the cluster (the following instru:
@@ -70,65 +79,65 @@ ssh-keygen
 
 2. Follow the on-screen instructions and if successful, the private (```id_rsa```) and public key (```id_rsa.pub```) will be created under the ```$HOME/.ssh```
 directory. 
-3. Forward the public key to your MRG leader so he/she can request a cluster account for you.
+3. Forward the public key to your MRG leader so he/she can request a Prometheus account for you.
 4. For Linux or Mac users use the following command to change the permissions of the private key due to its importance to security:
 
 ```bash
 chmod 600 ~/.ssh/id_rsa
 ```
 
-5. **Optional:** It's important that you use a dedicated ssh-key pair for accessing the CYENS cluster. It is also recommended
+5. **Optional:** It's important that you use a dedicated ssh-key pair for accessing Prometheus. It is also recommended
 to add a passphrase to your key:
 
 ```bash
 ssh-keygen -p -f ~/.ssh/id_rsa
 ```
 
-<h3>Connect to the cluster using SSH connection</h3>
-The following instructions will show you how to connect to the cluster using the SSH keys that you generated and stored, through your terminal:
+<h3>Connect to Prometheus using SSH connection</h3>
+The following instructions will show you how to connect to the Prometheus cluster using the SSH keys that you generated and stored, through your terminal:
 
 1. If the file  ```~/.ssh/config``` doesn't exist, creat it.
 2. Using a text editor, copy the following contents to that file:
 
 ```bash
-Host cyens_cluster
-  Hostname 82.116.197.12
+Host prometheus
+  Hostname prometheus.cyens.org.cy
   User <user-name>
   IdentityFile <path-to-private-key>
 ```
 
 3. Save the file **without an extension**
-4. Type the command ```ssh cyens_cluster``` and you should be able to connect to the cluster.
+4. Type the command ```ssh prometheus``` and you should be able to connect to the cluster.
 
 <h3>Connecting Desktop VS Code</h3>
 
 If you prefer to use <a href="https://code.visualstudio.com/">**Visual Studio Code**</a> (VS Code) as your editor, you can 
-connect VS Code to the cluster. The following instructions will guide you through how to connect the VS Code Desktop App to the cluster.
+connect VS Code to Prometheus. The following instructions will guide you through how to connect the VS Code Desktop App to the cluster.
 
 <h4>Configure SSH</h4>
 
-To connect your local VS Code to the cluster using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">**Remote-SSH**</a>
+To connect your local VS Code to the Prometheus cluster using the <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">**Remote-SSH**</a>
 feature, you must configure your ssh client to be able to hop through the login node to a compute node. To configure your ssh client, 
 add the following lines to your local ```~/.ssh/config``` file.
 
 ```bash
-Host cyens_cluster
-  Hostname 82.116.197.12
+Host prometheus
+  Hostname prometheus.cyens.org.cy
   User <user-name>
   IdentityFile <path-to-private-key>
 
 Host *.cluster
   User <user-name>
   IdentityFile <path-to-private-key>
-  ProxyJump cyens_cluster
+  ProxyJump prometheus
 ```
 
 <h4>Start a user SSHD process</h4>
 
-Connect to the CYENS cluster and create a new pair of ssh keys (on the head node):
+Connect to Prometheus and create a new pair of ssh keys (on the head node):
 
 ```bash
-ssh-keygen -t rsa -f .ssh/cluster_user_sshd
+ssh-keygen -t rsa -f .ssh/prometheus_user_sshd
 ```
 
 Then create the following ```sshd.sh``` bash script:
@@ -139,6 +148,7 @@ Then create the following ```sshd.sh``` bash script:
 #SBATCH -e res_%j.err      # File to which STDERR will be written
 #SBATCH -J sshd            # Job name
 #SBATCH --partition=defq   # Partition to submit to
+#SBATCH --qos=normal       # Priority queue to submit to
 #SBATCH --ntasks=1         # Number of tasks
 #SBATCH --cpus-per-task=2  # Number of cores per task
 #SBATCH --gres=gpu:1       # Number of GPUs
@@ -156,7 +166,7 @@ echo "Path:" $(pwd)
 echo "Listening on:" $PORT
 echo "********************************************************************"
 
-/usr/sbin/sshd -D -p ${PORT} -f /dev/null -h ${HOME}/.ssh/cluster_user_sshd
+/usr/sbin/sshd -D -p ${PORT} -f /dev/null -h ${HOME}/.ssh/prometheus_user_sshd
 ```
 
 and submit a batch job based on this, e.g., ```sbatch sshd.sh```. This will create a batch job
@@ -202,13 +212,14 @@ by VS Code.
 Slurm is the job scheduler we use. Here we will go into depth about some elements of the scheduler. There are many more 
 features of Slurm that go beyond the scope of this guide, but all that you as a user need to know should be available.
 
-The compute nodes are under a single slurm partition, called ```defq```. By using ```sinfo```
-you can get the following info:
+The compute nodes `gpu[01-08]` are under the slurm partition, called ```defq```, while the compute node `gpu09` is under 
+the partition `a6000`. For more information please check this [section](#partitions-list-and-priority-queues) By using ```sinfo``` you can get the following info:
 ```bash
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-defq*        up   infinite      1  idle~ gpu05
-defq*        up   infinite      2    mix gpu[01,08]
-defq*        up   infinite      5  alloc gpu[02-04,06-07]
+defq*        up   infinite      6  idle~ gpu[03-08]
+defq*        up   infinite      1    mix gpu02
+defq*        up   infinite      1   idle gpu01
+a6000        up   infinite      1    mix gpu09
 ```
 
 where you will see the current state of each compute node. If you want to check the current queue of jobs
@@ -232,8 +243,9 @@ simple script is below.
 ```bash
 #SBATCH -o res_%j.txt      # output file
 #SBATCH -e res_%j.err      # File to which STDERR will be written
-#SBATCH -J <job-name>      #
+#SBATCH -J <job-name>      # Job name
 #SBATCH --partition=defq   # Partition to submit to
+#SBATCH --qos=long         # Priority queue to submit to
 #SBATCH --ntasks=1         # Number of tasks
 #SBATCH --cpus-per-task=2  # Number of cores per task
 #SBATCH --gres=gpu:1       # Number of GPUs
@@ -252,11 +264,92 @@ you execute other commands until this command (job) is finished. You can create 
 as in a batch script (see the following example):
 
 ```bash
-srun -c 1 -n 1 -p defq --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
+srun -c 1 -n 1 -p defq --qos=normal --mem=100 --gres=gpu:0 -t 01:00 --pty /bin/bash
 ```
 
 </details>
 
+<details open>
+  <summary>
+<h2>Partitions List and Priority Queues</h2>
+  </summary>
+
+The Prometheus cluster has two partitions, ```defq``` and ```a6000```. The ```defq``` partition is the default partition.
+The default timelimit for all partitions and priority queues is **4 hours**. The following table shows the available 
+partitions and their corresponding priority queues. Please note that all resource limits are applied per group.
+
+<table>
+  <tr>
+    <th>Partition</th>
+    <th>#Nodes</th>
+    <th>Node list</th>
+    <th>GPU Type</th>
+    <th>Priority Queue</th>
+    <th>Timelimit</th>
+    <th>Max #CPUs</th>
+    <th>Max #GPUs</th>
+    <th>Max #RAM</th>
+    <th>Max #Jobs</th>
+    <th>Scheduling Priority</th>
+  </tr>
+  <tr>
+    <td rowspan="3"><code>defq</code></td>
+    <td rowspan="3">8</td>
+    <td rowspan="3"><code>gpu[01-08]</code></td>
+    <td rowspan="3">NVIDIA A5000</td>
+    <td><code>normal</code></td>
+    <td>1 day</td>
+    <td rowspan="2">384</td>
+    <td rowspan="2">48</td>
+    <td rowspan="2">3TB</td>
+    <td>30</td>
+    <td>High</td>
+  </tr>
+  <tr>
+    <td><code>long</code></td>
+    <td>7 days</td>
+    <td>20</td>
+    <td>Medium</td>
+  </tr>
+  <tr>
+    <td><code>preemptive</code></td>
+    <td>Infinite</td>
+    <td colspan="3" style="text-align: center">All<strong>*</strong></td>
+    <td>10</td>
+    <td>Low</td>
+  </tr>
+  <tr>
+    <td rowspan="3"><code>a6000</code></td>
+    <td rowspan="3">1</td>
+    <td rowspan="3"><code>gpu09</code></td>
+    <td rowspan="3">NVIDIA A6000 Ada</td>
+    <td><code>normal-a6000</code></td>
+    <td>1 day</td>
+    <td rowspan="2">48</td>
+    <td rowspan="2">3</td>
+    <td rowspan="2">384GB</td>
+    <td>6</td>
+    <td>High</td>
+  </tr>
+  <tr>
+    <td><code>long-a6000</code></td>
+    <td>7 days</td>
+    <td>4</td>
+    <td>Medium</td>
+  </tr>
+  <tr>
+    <td><code>preemptive-a6000</code></td>
+    <td>Infinite</td>
+    <td colspan="3" style="text-align: center">All<strong>*</strong></td>
+    <td>2</td>
+    <td>Low</td>
+  </tr>
+</table>
+
+\* Jobs that are submitted to the `preepmtive` or `preemptive-a6000` priority queues can be automatically terminated by Slurm,
+when a newly submitted job of higher priority, wants to allocate the same resources  - the <code>requeue</code> option is available. 
+**Please use them sparingly**.
+</details>
 
 <details open>
   <summary>
