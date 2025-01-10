@@ -1,6 +1,6 @@
 <h1>Prometheus Cluster Documentation</h1>
 
-![Prometheus ASCII Art](assets/prometheus.png)
+![Prometheus ASCII Art](assets/prometheus-ascii-text-art.png)
 
 <h2>Overview</h2>
 
